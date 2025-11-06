@@ -19,29 +19,26 @@ import { fetchArtworks } from '../services/api';
 const DEFAULT_ROWS = 10;
 
 export const ArtworkTable: React.FC = () => {
-  // --- Component State ---
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // --- Pagination State ---
   const [lazyState, setLazyState] = useState<DataTableStateEvent>({
     first: 0,
     rows: DEFAULT_ROWS,
-    sortField: '', // ✅ must be string, not undefined
+    sortField: '', 
     sortOrder: undefined,
     filters: {},
     multiSortMeta: undefined,
   });
 
-  // --- Selection State ---
+  
   const [selectedRowIds, setSelectedRowIds] = useState<Set<number>>(new Set());
 
-  // --- Custom Select Overlay ---
+  
   const [customSelectCount, setCustomSelectCount] = useState<string>('');
   const op = useRef<OverlayPanel>(null);
 
-  // --- Fetch Data ---
   const loadArtworks = async () => {
     setLoading(true);
     try {
@@ -58,17 +55,17 @@ export const ArtworkTable: React.FC = () => {
     }
   };
 
-  // Fetch data whenever pagination or sorting changes
+  
   useEffect(() => {
     loadArtworks();
   }, [lazyState]);
 
-  // --- Derived State ---
+  
   const selectedArtworksOnCurrentPage = useMemo(() => {
     return artworks.filter((art: Artwork) => selectedRowIds.has(art.id));
   }, [artworks, selectedRowIds]);
 
-  // --- Selection Handler (✅ corrected type) ---
+  
   const onSelectionChange = (e: DataTableSelectionMultipleChangeEvent<Artwork[]>) => {
   const newSelectedObjects: Artwork[] = e.value as Artwork[];
 
@@ -78,10 +75,10 @@ export const ArtworkTable: React.FC = () => {
     setSelectedRowIds((prevMasterIds) => {
       const newMasterSet = new Set(prevMasterIds);
 
-      // Add newly selected IDs
+      
       newSelectedIdsOnPage.forEach((id) => newMasterSet.add(id));
 
-      // Remove deselected IDs
+      
       currentPageIds.forEach((id) => {
         if (!newSelectedIdsOnPage.has(id)) {
           newMasterSet.delete(id);
@@ -92,7 +89,7 @@ export const ArtworkTable: React.FC = () => {
     });
   };
 
-  // --- Custom Select Handler ---
+  
   const handleCustomSelect = () => {
     const count = parseInt(customSelectCount, 10);
     if (!count || count <= 0 || count > artworks.length) {
@@ -112,7 +109,7 @@ export const ArtworkTable: React.FC = () => {
     setCustomSelectCount('');
   };
 
-  // --- Pagination Handler ---
+  
   const onPageChange = (event: DataTablePageEvent) => {
     setLazyState((prevState) => ({
       ...prevState,
@@ -120,10 +117,10 @@ export const ArtworkTable: React.FC = () => {
     }));
   };
 
-  // --- Render ---
+  
   return (
     <div className="card">
-      {/* Header Controls */}
+      
       <div style={{ margin: '1rem 0' }}>
         <Button
           type="button"
@@ -136,7 +133,7 @@ export const ArtworkTable: React.FC = () => {
         </span>
       </div>
 
-      {/* Custom Select Overlay */}
+      
       <OverlayPanel ref={op} style={{ padding: '1rem' }}>
         <div>
           <label htmlFor="selectCount" style={{ display: 'block', marginBottom: '0.5rem' }}>
@@ -153,7 +150,7 @@ export const ArtworkTable: React.FC = () => {
         </div>
       </OverlayPanel>
 
-      {/* DataTable */}
+      
       <DataTable
         value={artworks}
         lazy

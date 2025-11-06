@@ -17,6 +17,6 @@ export async function fetchArtworks(page: number, limit: number) : Promise<ApiRe
   const res = await fetch(url);
   if (!res.ok) throw new Error(`API error ${res.status}`);
   const json = await res.json();
-  // The API returns pagination info in "pagination"
+  
   return json as ApiResponse;
 }
