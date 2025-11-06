@@ -3,7 +3,7 @@
 This project is a React (Vite + TypeScript) application built for an internship assignment. It features a data table that displays artwork data from the Art Institute of Chicago API, with server-side pagination and persistent row selection.
 
 **Deployed Application URL:** [https://artic-app.netlify.app/]
-**Github Repository:[]
+**GitHub  URL:** []
 
 ---
 
