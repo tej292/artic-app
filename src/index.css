@@ -1,0 +1,73 @@
+.App {
+  width: 100%;
+  max-width: 1600px; /* Max width for large screens */
+  margin: 0 auto;
+  padding: 2rem; /* Responsive padding (more on desktop) */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. App Header (Responsive Typography) */
+.App-header {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.App-header h1 {
+  /* clamp(MIN, PREFERRED, MAX) */
+  font-size: clamp(1.75rem, 1.25rem + 2.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+/* 3. Main Card Style (for the DataTable) */
+.card {
+  flex-grow: 1; /* Make card fill remaining vertical space */
+  display: flex;
+  flex-direction: column;
+  
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  overflow: hidden; /* Ensures DataTable respects rounded corners */
+}
+
+/* --- Responsive Adjustments --- */
+
+/* 4. Style for the custom select button and total count */
+.card > div:first-child {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  gap: 1rem; /* Space between items */
+}
+
+/* 5. Style for the Inscriptions column */
+.p-datatable .p-datatable-tbody > tr > td {
+  vertical-align: top;
+}
+
+.p-datatable .p-datatable-tbody > tr > td[style*="max-width"] {
+  white-space: pre-wrap !important; /* Ensure wrapping */
+  word-break: break-word;
+}
+
+/* 6. Mobile-specific padding */
+@media (max-width: 768px) {
+  .App {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .App-header {
+    margin-bottom: 1rem;
+  }
+}

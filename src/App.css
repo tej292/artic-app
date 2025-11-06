@@ -1,0 +1,29 @@
+.App {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.App-header {
+  margin-bottom: 2rem;
+}
+
+
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: left;
+}
+
+
+.p-datatable .p-column-header-content {
+  justify-content: center;
+}
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: left;
+  vertical-align: top;
+}
